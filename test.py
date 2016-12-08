@@ -16,10 +16,22 @@ class MarkdownParsingTests(unittest.TestCase):
             {
                 "type": "paragraph",
                 "text": "This is the first paragraph",
+                "children": [
+                    {
+                        "type": "text",
+                        "text": "This is the first paragraph"
+                    }
+                ]
             },
             {
                 "type": "paragraph",
                 "text": "This is the second paragraph",
+                "children": [
+                    {
+                        "type": "text",
+                        "text": "This is the second paragraph"
+                    }
+                ]
             }
         ])
 
@@ -40,6 +52,12 @@ class MarkdownParsingTests(unittest.TestCase):
             {
                 "type": "paragraph",
                 "text": "This is the first paragraph",
+                "children": [
+                    {
+                        "type": "text",
+                        "text": "This is the first paragraph"
+                    }
+                ]
             },
             {
                 "type": "heading",
@@ -49,6 +67,43 @@ class MarkdownParsingTests(unittest.TestCase):
             {
                 "type": "paragraph",
                 "text": "This is the second paragraph",
+                "children": [
+                    {
+                        "type": "text",
+                        "text": "This is the second paragraph"
+                    }
+                ]
+            }
+        ])
+
+    def testEmphasisWithinParagraph(self):
+        self.assertEqual(self.markdown(
+        "# Major heading\n"
+        "\n"
+        "A paragraph with *emphasis* half way through\n"),
+        [
+            {
+                "text": "Major heading",
+                "level": 1,
+                "type": "heading"
+            },
+            {
+                "text": "A paragraph with emphasis half way through",
+                "children": [
+                    {
+                        "text": "A paragraph with ",
+                        "type": "text"
+                    },
+                    {
+                        "text": "emphasis",
+                        "type": "emphasis"
+                    },
+                    {
+                        "text": " half way through",
+                        "type": "text"
+                    }
+                ],
+                "type": "paragraph"
             }
         ])
 
