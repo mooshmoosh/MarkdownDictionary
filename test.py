@@ -107,3 +107,49 @@ class MarkdownParsingTests(unittest.TestCase):
             }
         ])
 
+    def testList(self):
+        self.assertEqual(self.markdown(
+        "- item 1\n"
+        "- item 2 *with emph*\n"
+        "- item 3"),
+        [
+            {
+                'type': 'list',
+                'text': 'item 1\nitem 2 with emph\nitem 3',
+                'children': [
+                    {
+                        'text': 'item 1',
+                        'children': [
+                            {
+                                'type': 'text',
+                                'text': 'item 1'
+                            }
+                        ],
+                    },
+                    {
+                        'text': 'item 2 with emph',
+                        'children': [
+                            {
+                                'type': 'text',
+                                'text': 'item 2 '
+                            },
+                            {
+                                'type': 'emphasis',
+                                'text': 'with emph'
+                            }
+                        ],
+                    },
+                    {
+                        'text': 'item 3',
+                        'children': [
+                            {
+                                'type': 'text',
+                                'text': 'item 3'
+                            }
+                        ],
+                    }
+                ]
+            }
+        ])
+
+
